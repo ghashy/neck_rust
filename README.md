@@ -1,6 +1,6 @@
 # neck_rust
 
->This is an app for training guitar skills, made with [egui](https://github.com/emilk/egui)
+This is an app for training guitar skills, made with [egui](https://github.com/emilk/egui)
 
 What's done:
 - [x] Welcome window
