@@ -90,14 +90,17 @@ impl NeckRust {
             weak_bg_fill: Color32::WHITE,
             bg_stroke: egui::Stroke::new(scl(2.2), Color32::RED),
             rounding: egui::Rounding::none(),
-            fg_stroke: egui::Stroke::new(scl(2.2), Color32::GOLD),
+            fg_stroke: egui::Stroke::new(scl(2.2), Color32::WHITE),
             expansion: scl(2.2),
         };
         let visuals = Visuals {
             widgets: egui::style::Widgets {
                 inactive: egui::style::WidgetVisuals {
                     bg_fill: hex_to_egui_rgb(HOVER_GREEN),
-                    bg_stroke: egui::Stroke::new(scl(2.2), Color32::BLACK),
+                    bg_stroke: egui::Stroke::new(
+                        scl(2.2),
+                        Color32::TRANSPARENT,
+                    ),
                     weak_bg_fill: hex_to_egui_rgb(BLUE),
                     ..widget_visuals
                 },

@@ -9,8 +9,9 @@ use egui::{
     pos2, vec2, Align2, Direction, FontId, Layout, Pos2, Response, Shape,
 };
 use egui::{Color32, Rounding, Sense, Stroke};
+use egui_extras::RetainedImage;
 
-fn draw_start_block(star: &Shape, ui: &mut egui::Ui) -> Response {
+fn draw_start_block(ui: &mut egui::Ui, star: &Shape) -> Response {
     // Parent (star) object's properties
     let star_size = vec2(792., 792.).scl();
     let (rect, response) = ui.allocate_exact_size(star_size, Sense::click());
@@ -304,7 +305,7 @@ pub fn connect(ui: &mut egui::Ui, a: Rect, b: Rect, direction: Direction) {
 // ----- Widget adapter functions ------------------------------------------- //
 
 pub fn start_block<'a>(star: &'a Shape) -> impl egui::Widget + 'a {
-    move |ui: &mut egui::Ui| draw_start_block(star, ui)
+    move |ui: &mut egui::Ui| draw_start_block(ui, star)
 }
 
 pub fn guitar_block(

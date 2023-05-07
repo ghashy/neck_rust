@@ -1,7 +1,7 @@
 // neck_rust binary
 // main.rs
 
-use eframe::{CreationContext, HardwareAcceleration, NativeOptions, Renderer};
+use eframe::{CreationContext, NativeOptions, Renderer};
 use egui::vec2;
 use neck_rust::{
     app_constants::{MIN_HEIGHT, MIN_WIDTH, WIN_HEIGHT, WIN_WIDTH},

@@ -1,8 +1,8 @@
 use egui::{
-    vec2, CentralPanel, Color32, Context, Frame, Label, Layout, Margin, NumExt,
-    Pos2, Rect, RichText, Rounding, Stroke, Ui,
+    vec2, CentralPanel, Color32, Context, Frame, Layout, Margin, NumExt, Pos2,
+    Rect, RichText, Rounding, Stroke, Ui,
 };
-use egui_extras::{Size, StripBuilder};
+use egui_extras::{RetainedImage, Size, StripBuilder};
 
 use crate::{
     app_constants::{LIGHT_GREEN, SOFT_GREEN, WIN_HEIGHT, WIN_WIDTH},
@@ -41,6 +41,13 @@ impl WelcomeWindow {
         let panel = CentralPanel::default().frame(frame);
 
         panel.show(ctx, |ui: &mut Ui| {
+            // We need to allocate this before StripBuilder
+            // for independent positioning.
+            let mut child_ui = ui.child_ui(
+                ui.max_rect(),
+                Layout::left_to_right(egui::Align::Min),
+            );
+            // On original layer
             StripBuilder::new(ui)
                 .sizes(Size::remainder(), 2)
                 .horizontal(|mut strip| {
@@ -100,6 +107,14 @@ impl WelcomeWindow {
                         ui.put(end_rect, widget3);
                     });
                 });
+            // On other layer
+            let settings_button = child_ui.add(
+                egui::Button::new(RichText::new("Settings").size(scl(40.)))
+                    .min_size(vec2(200., 50.).scl()),
+            );
+            if settings_button.clicked() {
+                println!("Clicked!");
+            }
         });
     }
 
@@ -136,6 +151,7 @@ impl WelcomeWindow {
             ctx.request_repaint();
             if (*time) >= 5. {
                 self.show_hover = false;
+                self.time = None;
             }
         });
     }
